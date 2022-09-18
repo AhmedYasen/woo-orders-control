@@ -1,0 +1,59 @@
+{
+  "name": "woo-orders-ctrl",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "repository": "",
+  "keywords": [],
+  "author": "AhmedYasen",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.66",
+    "@electron-forge/maker-deb": "^6.0.0-beta.66",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.66",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.66",
+    "@electron-forge/maker-zip": "^6.0.0-beta.66",
+    "electron": "^20.1.3"
+  },
+  "dependencies": {
+    "carbone": "^3.2.3",
+    "electron-squirrel-startup": "^1.0.0",
+    "jspdf": "^2.5.1",
+    "pdf-to-printer": "^5.3.0",
+    "pdfmake": "^0.2.5",
+    "toml": "^3.0.0",
+    "woocommerce-api": "^1.5.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "woo_orders_ctrl"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}

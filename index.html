@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html  dir="rtl">
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'"> -->
+    <link href="./styles.css" rel="stylesheet">
+    <title>Order Management</title>
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      td, th {
+        text-align: right;
+        border: 1px solid #dddddd;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      </style>
+  </head>
+  <body>
+    <select name="order-request-types" id="order-request-type">
+      <option value="any">كل الطلبات</option>
+      <option value="processing">قيد التنفيذ</option>
+      <option value="pending">بانتظار الدفع</option>
+      <option value="completed">مكتمل</option>
+      <option value="canceled">ملغى</option>
+      <option value="refunded">مرتجع</option>
+      <option value="failed">فشل</option>
+    </select>
+    <button id="ListOrders">عرض الطلبات</button>
+    <table id="orders-table">
+      <tr>
+        <th>حذف</th>
+        <th>رقم الطلب</th>
+        <th>اسم الزبون</th>
+        <th>الحالة</th>
+        <th>مدة الطلب</th>
+        <th>الإجمالى (جم)</th>
+        <th>تحديث</th>
+        <th>طباعة الفاتورة</th>
+      </tr>
+
+    </table>
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+  </body>
+</html>
