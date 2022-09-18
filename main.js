@@ -2,10 +2,11 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const carbone = require('carbone');
 const fs = require('fs');
-const {print, getPrinters} = require('pdf-to-printer')
+const { print, getPrinters } = require('pdf-to-printer')
 
 const WooCommerceAPI = require('woocommerce-api');
 const path = require('path')
+const toml = require('toml');
 
 let orders = {};
 
@@ -18,10 +19,14 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js')
     }
   })
+
+  let configs = toml.parse(fs.readFileSync("./config.toml"));
+
+  console.log("configs: \n", configs);
   const woo = new WooCommerceAPI({
     url: "https://100habbah.com",
-    consumerKey: "",
-    consumerSecret: "",
+    consumerKey: configs['woocommerce-api'].consumerKey,
+    consumerSecret: configs['woocommerce-api'].consumerSecret,
     wpAPI: true,
     version: 'wc/v3'
   });
@@ -84,8 +89,8 @@ function createWindow() {
       let filename = `${order.name}#${order.id}.pdf`;
       fs.writeFileSync(filename, result);
       const options = {
-        printer: 'XP-80',
-        copies: 3,
+        printer: configs['printer'].name,
+        copies: configs['printer'].copies,
       }
       print(filename, options).then(console.log);
       event.sender.send('orders:print-pdf-handle', { success: true });
@@ -121,7 +126,7 @@ function createWindow() {
           // console.log("line_items\n", ord.line_items);
           ord.shipping_total = result[id].shipping_total;
           ord.total = result[id].total;
-          orders[ord.id] = {date_modified: ord.date_modified };
+          orders[ord.id] = { date_modified: ord.date_modified };
           // console.log("orders", orders)
           newOrders[id] = ord;
         }
