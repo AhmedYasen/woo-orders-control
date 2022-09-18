@@ -20,8 +20,8 @@ function createWindow() {
   })
   const woo = new WooCommerceAPI({
     url: "https://100habbah.com",
-    consumerKey: "ck_66c37e5a5e9d0a50fcf6df7b8ea65219dc241fb1",
-    consumerSecret: "cs_e2c013cd8cd589b56989578c144ff17af4ea3d70",
+    consumerKey: "",
+    consumerSecret: "",
     wpAPI: true,
     version: 'wc/v3'
   });
