@@ -8,6 +8,8 @@ const WooCommerceAPI = require('woocommerce-api');
 const path = require('path')
 const toml = require('toml');
 
+require('update-electron-app')()
+
 let orders = {};
 
 function createWindow() {
