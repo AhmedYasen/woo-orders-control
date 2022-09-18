@@ -88,13 +88,13 @@ function createWindow() {
         return;
       }
 
-      let filename = `${order.name}#${order.id}.pdf`;
-      fs.writeFileSync(filename, result);
+      let filepath = `./../${order.name}#${order.id}.pdf`;
+      fs.writeFileSync(filepath, result);
       const options = {
         printer: configs['printer'].name,
         copies: configs['printer'].copies,
       }
-      print(filename, options).then(console.log);
+      print(filepath, options).then(console.log);
       event.sender.send('orders:print-pdf-handle', { success: true });
     })
   })
