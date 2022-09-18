@@ -1,0 +1,7 @@
+[woocommerce-api]
+consumerKey = "ck_"
+consumerSecret = "cs_"
+
+[printer]
+name = 'XP-80'
+copies = 3
