@@ -1,3 +1,55 @@
 /* styles.css */
 
 /* Add styles here to customize the appearance of your app */
+
+
+#result-msg {
+    position: fixed;
+    bottom: 0;
+}
+
+.success-msg {
+    color: green;
+    background-color: lightgreen;
+    font-size: 1.125em;
+    text-align: right;
+    margin-right: 5em;
+    margin-top: 0.25em;
+    padding: 1em 2em;
+    opacity: 1;
+    transition: all 3s;
+    width: 10em;
+}
+
+.info-msg {
+    color: blue;
+    background-color: lightblue;
+    font-size: 1.125em;
+    text-align: right;
+    margin-right: 5em;
+    margin-top: 0.25em;
+    padding: 1em 2em;
+    opacity: 1;
+    transition: all 3s;
+    width: 10em;
+}
+
+.failure-msg {
+    color: red;
+    background-color: lightsalmon;
+    font-size: 1.125em;
+    text-align: right;
+    margin-right: 5em;
+    margin-top: 0.25em;
+    padding: 1em 2em;
+    width: 10em;
+    opacity: 1;
+    transition: opacity 3s;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 1em;
+}

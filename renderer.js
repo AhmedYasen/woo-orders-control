@@ -114,9 +114,11 @@ orders.delete = (id) => {
     if(data.success) {
       tr.remove();
       console.log("TODO: success!");
+      showSuccessMsg("تم الحذف بنجاح")
       return;
     }
     tr.style.display = 'block';
+    showErrMsg(`فشلت عملية حذف الطلب رقم ${id}`)
     console.log("TODO: failed to delete the order");
   })
 }
@@ -131,6 +133,7 @@ orders.update = (id) => {
       return;
     }
     console.log("TODO: success!")
+    showSuccessMsg(`تم تحديث الطلب رقم ${id}`)
   })
 };
 
@@ -146,6 +149,7 @@ listOrders.onclick = async () => {
     once = false;
     if(data.success == false) {
       console.log("TODO: [error]: ", data.result);
+      showErrMsg(`هناك خطأ: ${data.result}`)
       return;
     }
 

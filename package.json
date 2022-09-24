@@ -8,7 +8,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
-  "repository": "",
+  "repository": "AhmedYasen/woo-orders-control",
   "keywords": [],
   "author": "AhmedYasen",
   "license": "CC0-1.0",

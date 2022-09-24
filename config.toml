@@ -1,6 +1,6 @@
 [woocommerce-api]
-consumerKey = "ck_"
-consumerSecret = "cs_"
+consumerKey = "ck_0bc79adbb9121e1ea9d708418059e58527e1f3c5"
+consumerSecret = "cs_76c330847183f953cee39d6b96c009e30a265931"
 
 [printer]
 name = 'XP-80'
