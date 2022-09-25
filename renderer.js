@@ -15,7 +15,7 @@ let statusOptions = {
   pending: "بانتظار الدفع",
   processing: "قيد التنفيذ",
   completed: "مكتمل",
-  canceled: "ملغى",
+  cancelled: "ملغى",
   refunded: "مرتجع",
   failed: "فشل",
 };
