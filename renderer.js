@@ -86,6 +86,27 @@ ordersTable.appendOrder = (ord) => {
 }
 
 
+// function showOrderDetails(id) {
+//   let ord = orders[id];
+
+//   let popup_close = document.createElement('div');
+//   popup_close.id = 'popup-close';
+//   popup_close.innerText = '✕';
+
+//   let order_details = document.createElement('div');
+//   order_details.innerText = `
+//   العنوان: ${ord.address}
+
+//   `
+
+//   let popup = document.createElement('div')
+//   popup.id = 'popup';
+//   popup.appendChild(popup_close);
+//   popup.appendChild(order_details);
+
+
+// }
+
 
 
 
@@ -155,7 +176,7 @@ listOrders.onclick = async () => {
 
     
     let result = data.result;
-    
+    console.log(result);
     for (id in result) {
       orders[result[id].id] = result[id];
       ordersTable.appendOrder(result[id]);

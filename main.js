@@ -75,7 +75,9 @@ function createWindow() {
       p: products,
       deliveryCost: order.shipping_total,
       discount: '0',
-      total: order.total
+      total: order.total,
+      note: order.customer_note,
+      addr: order.address
     };
     var options = {
       convertTo: 'pdf',
@@ -128,12 +130,15 @@ function createWindow() {
           // console.log("line_items\n", ord.line_items);
           ord.shipping_total = result[id].shipping_total;
           ord.total = result[id].total;
+          ord.customer_note = result[id].customer_note;
+          ord.address = `المنطقة ${result[id].meta_data[4].value} عمارة ${result[id].meta_data[5].value} شقة ${result[id].meta_data[6].value}`;
           orders[ord.id] = { date_modified: ord.date_modified };
           // console.log("orders", orders)
           newOrders[id] = ord;
         }
 
         event.sender.send("orders:list-all-handle", { success: true, result: newOrders })
+        // event.sender.send("orders:list-all-handle", { success: true, result: result })
       })
       .catch((error) => {
         event.sender.send("orders:list-all-handle", { success: false, result: error })

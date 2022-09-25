@@ -28,3 +28,4 @@ function showMsg(msg, msgClass = 'info-msg') {
     msgDom.appendChild(close)
     resultMsg.appendChild(msgDom)
 }
+

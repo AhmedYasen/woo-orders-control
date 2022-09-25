@@ -53,3 +53,20 @@
     justify-content: flex-start;
     margin: 1em;
 }
+
+
+#popup {
+    position: fixed;
+    z-index: 2;
+    width: 50%;
+    top: 10%;
+    left: 25%;
+    background-color: antiquewhite;
+    overflow-x: hidden;
+    padding: 2em;
+}
+#popup-close {
+    display: block;
+    color: red;
+    font-weight: bold;
+}
