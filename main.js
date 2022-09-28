@@ -59,7 +59,7 @@ function createWindow() {
   ipcMain.handle("orders:print-pdf", (event, order) => {
 
 
-    let d = new Date();
+    let d = order.date_created.split('T');
 
     let numFixedWidth = (num, width) => {
       return ("      " + Number(num)).slice(-width);
@@ -71,8 +71,8 @@ function createWindow() {
     let data = {
       id: order.id,
       name: order.name,
-      date: d.toDateString(),
-      time: d.toLocaleTimeString(),
+      date: d[1],
+      time: d[0],
       p: products,
       deliveryCost: order.shipping_total,
       discount: '0',
