@@ -27,13 +27,15 @@
   <body>
     <select name="order-request-types" id="order-request-type">
       <option value="any">كل الطلبات</option>
-      <option value="processing">قيد التنفيذ</option>
+      <option value="processing" selected>قيد التنفيذ</option>
       <option value="pending">بانتظار الدفع</option>
       <option value="completed">مكتمل</option>
       <option value="canceled">ملغى</option>
       <option value="refunded">مرتجع</option>
       <option value="failed">فشل</option>
     </select>
+    <label for="hide-after-print">إخفاء بعد الطباعة</label>
+    <input type="checkbox" name="hide-after-print" id="hide-after-print">
     <button id="ListOrders">عرض الطلبات</button>
     <table id="orders-table">
       <tr>

@@ -44,7 +44,7 @@ ordersTable.appendOrder = (ord) => {
   /**** STATUS OPTIONS START*****/
   statusHTMLOptions = `<td><select name="status" id="st-${ord.id}">`
   statusHTMLOptions += `<option value="${ord.status}" selected>${statusOptions[ord.status]}</option>`
-  let removedStatus = statusOptions[ord.status]; 
+  let removedStatus = statusOptions[ord.status];
   delete statusOptions[ord.status]
 
   for (key in statusOptions) {
@@ -116,23 +116,33 @@ ordersTable.appendOrder = (ord) => {
 /***************************************************************************/
 /*************************** Orders Controls *******************************/
 /***************************************************************************/
+let hide_after_print = document.getElementById('hide-after-print');
 let listOrders = document.getElementById('ListOrders');
 let orders = {};
 
 orders.print = (id) => {
   let ord = orders[id];
-  // console.log(ord);
-  // console.log(orders);
+  let hide_order = hide_after_print.checked;
+
   window.ordersApi.print(ord, (data) => {
+    if (data.success) {
+      showSuccessMsg("تم تنفيذ أمر الطباعة");
+      if(hide_order) {
+        let tr = document.getElementById(`tr-${id}`);
+        tr.remove();
+      }
+    } else {
+      showErrMsg(`هناك خطأ: ${data.result}`);
+    }
     console.log("print: ", data);
   })
 }
 
 orders.delete = (id) => {
-  window.ordersApi.delete({id}, (data) => {
+  window.ordersApi.delete({ id }, (data) => {
     let tr = document.getElementById(`tr-${id}`);
     tr.style.display = 'none';
-    if(data.success) {
+    if (data.success) {
       tr.remove();
       console.log("TODO: success!");
       showSuccessMsg("تم الحذف بنجاح")
@@ -148,8 +158,8 @@ orders.update = (id) => {
   let statusElement = document.getElementById(`st-${id}`);
   let selectedStatus = statusElement.options[statusElement.selectedIndex].value;
 
-  window.ordersApi.update({id, status: selectedStatus}, (data) => {
-    if(data.success == false) {
+  window.ordersApi.update({ id, status: selectedStatus }, (data) => {
+    if (data.success == false) {
       statusElement.options = statusOptionsKeys.indexOf(orders[id]);
       return;
     }
@@ -163,18 +173,18 @@ listOrders.onclick = async () => {
   let order_request_type = document.getElementById("order-request-type");
   let order_type = order_request_type.options[order_request_type.selectedIndex].value;
   window.ordersApi.listAll(order_type, (data) => {
-    
-    if(!once) {
+
+    if (!once) {
       return;
     }
     once = false;
-    if(data.success == false) {
+    if (data.success == false) {
       console.log("TODO: [error]: ", data.result);
       showErrMsg(`هناك خطأ: ${data.result}`)
       return;
     }
 
-    
+
     let result = data.result;
     console.log(result);
     for (id in result) {
@@ -182,6 +192,6 @@ listOrders.onclick = async () => {
       ordersTable.appendOrder(result[id]);
     }
   });
-  
+
 }
 
