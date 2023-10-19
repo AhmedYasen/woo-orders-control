@@ -71,6 +71,7 @@ function createWindow() {
     let data = {
       id: order.id,
       name: order.name,
+      ph: order.phone,
       date: d[1],
       time: d[0],
       p: products,
@@ -80,6 +81,7 @@ function createWindow() {
       note: order.customer_note,
       addr: order.address
     };
+
     var options = {
       convertTo: 'pdf',
       lang: 'ar-EG',
@@ -107,9 +109,12 @@ function createWindow() {
       .then((response) => {
 
         let result = JSON.parse(response.toJSON().body);
-
+        let metaDataGetter = (metadata, key) => {
+          return metadata.find(item => item.key == key).value
+        }
         let newOrders = {};
         for (id in result) {
+          // console.log(`ORD - ${id}: ${JSON.stringify(result[id])}`)
           if (orders[result[id].id] && orders[result[id].id].date_modified == result[id].date_modified) {
             console.log("order is already up to date");
             continue;
@@ -117,6 +122,7 @@ function createWindow() {
           let ord = {};
           ord.id = result[id].id;
           ord.name = result[id].billing.first_name;
+          ord.phone = result[id].billing.phone;
           ord.status = result[id].status;
           ord.date_created = result[id].date_created;
           ord.date_modified = result[id].date_modified;
@@ -132,7 +138,12 @@ function createWindow() {
           ord.shipping_total = result[id].shipping_total;
           ord.total = result[id].total;
           ord.customer_note = result[id].customer_note;
-          ord.address = `المنطقة ${result[id].meta_data[4].value} عمارة ${result[id].meta_data[5].value} شقة ${result[id].meta_data[6].value}`;
+
+          metadata = result[id].meta_data
+          console.log("metadata: ", metadata)
+          console.log("TEST: ", metaDataGetter(metadata, '_billing_region'))
+          ord.address = `المنطقة ${metaDataGetter(metadata, '_billing_region')} عمارة ${metaDataGetter(metadata, '_billing_building')} شقة ${metaDataGetter(metadata, '_billing_flat_number')}`;
+          
           orders[ord.id] = { date_modified: ord.date_modified };
           // console.log("orders", orders)
           newOrders[id] = ord;
