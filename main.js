@@ -93,7 +93,7 @@ function createWindow() {
         return;
       }
 
-      let filepath = `./../${order.name}#${order.id}.pdf`;
+      let filepath = `./../${order.name.replace(/[\/\\]/g, '_')}#${order.id}.pdf`;
       fs.writeFileSync(filepath, result);
       const options = {
         printer: configs['printer'].name,
